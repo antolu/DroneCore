@@ -299,4 +299,19 @@ const char *Telemetry::result_str(Result result)
     }
 }
 
+bool operator==(const Telemetry::Position &lhs, const Telemetry::Position &rhs)
+{
+    return lhs.latitude_deg == rhs.latitude_deg
+           && lhs.longitude_deg == rhs.longitude_deg
+           && lhs.absolute_altitude_m == rhs.absolute_altitude_m
+           && lhs.relative_altitude_m == rhs.relative_altitude_m;
+}
+
+std::ostream &operator<<(std::ostream &str, Telemetry::Position const &position)
+{
+    return str << "[lat: " << position.latitude_deg << ", lng: " << position.longitude_deg
+           << ", abs_alt: " << position.absolute_altitude_m << ", rel_alt: " << position.relative_altitude_m
+           << "]";
+}
+
 } // namespace dronecore
