@@ -2,7 +2,7 @@
 
 #include "plugin_impl_base.h"
 #include "mavlink_include.h"
-#include "device.h"
+#include "system.h"
 #include "action.h"
 #include <cstdint>
 
@@ -11,7 +11,7 @@ namespace dronecore {
 class ActionImpl : public PluginImplBase
 {
 public:
-    ActionImpl(Device &device);
+    ActionImpl(System &system);
     ~ActionImpl();
 
     void init() override;

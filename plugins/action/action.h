@@ -6,7 +6,7 @@
 
 namespace dronecore {
 
-class Device;
+class System;
 class ActionImpl;
 
 /**
@@ -25,17 +25,17 @@ class Action : public PluginBase
 {
 public:
     /**
-     * @brief Constructor. Creates the plugin for a specific Device.
+     * @brief Constructor. Creates the plugin for a specific System.
      *
      * The plugin is typically created as shown below:
      *
      *     ```cpp
-     *     auto action = std::make_shared<Action>(device);
+     *     auto action = std::make_shared<Action>(system);
      *     ```
      *
-     * @param device The specific device associated with this plugin.
+     * @param system The specific system associated with this plugin.
      */
-    explicit Action(Device &device);
+    explicit Action(System &system);
 
     /**
      * @brief Destructor (internal use only).
@@ -48,7 +48,7 @@ public:
     enum class Result {
         UNKNOWN, /**< @brief Unspecified error. */
         SUCCESS, /**< @brief Success. The action command was accepted by the vehicle. */
-        NO_DEVICE, /**< @brief No device is connected error. */
+        NO_DEVICE, /**< @brief No system is connected error. */
         CONNECTION_ERROR, /**< @brief %Connection error. */
         BUSY, /**< @brief Vehicle busy error. */
         COMMAND_DENIED, /**< @brief Command refused by vehicle. */
