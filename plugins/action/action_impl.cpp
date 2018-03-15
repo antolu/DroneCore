@@ -441,8 +441,8 @@ ActionImpl::action_result_from_command_result(MavlinkCommands::Result result)
     switch (result) {
         case MavlinkCommands::Result::SUCCESS:
             return Action::Result::SUCCESS;
-        case MavlinkCommands::Result::NO_DEVICE:
-            return Action::Result::NO_DEVICE;
+        case MavlinkCommands::Result::NO_SYSTEM:
+            return Action::Result::NO_SYSTEM;
         case MavlinkCommands::Result::CONNECTION_ERROR:
             return Action::Result::CONNECTION_ERROR;
         case MavlinkCommands::Result::BUSY:
