@@ -92,7 +92,6 @@ int main(int argc, char **argv)
     // Arm vehicle
     std::cout << "Arming..." << std::endl;
     const Action::Result arm_result = action->arm();
-
     if (arm_result != Action::Result::SUCCESS) {
         std::cout << ERROR_CONSOLE_TEXT << "Arming failed:" << Action::result_str(
                       arm_result) << NORMAL_CONSOLE_TEXT << std::endl;
