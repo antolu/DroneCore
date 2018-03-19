@@ -2,7 +2,7 @@
 
 #include "plugin_impl_base.h"
 #include "mavlink_include.h"
-#include "system.h"
+#include "mavlink_system.h"
 #include "action.h"
 #include <cstdint>
 
