@@ -38,7 +38,7 @@ void ActionImpl::enable()
     // we won't receive an answer anyway in init because the receive loop is not
     // called while we are being created here.
     _parent->set_msg_rate_async(MAVLINK_MSG_ID_EXTENDED_SYS_STATE, 1.0, nullptr,
-                                MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
+                                MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
 }
 
 void ActionImpl::disable() {}
@@ -61,8 +61,8 @@ Action::Result ActionImpl::arm() const
     return action_result_from_command_result(
                _parent->send_command_with_ack(
                    MAV_CMD_COMPONENT_ARM_DISARM,
-                   MavlinkCommands::Params {1.0f, NAN, NAN, NAN, NAN, NAN, NAN},
-                   MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
+                   MAVLinkCommands::Params {1.0f, NAN, NAN, NAN, NAN, NAN, NAN},
+                   MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
 }
 
 Action::Result ActionImpl::disarm() const
@@ -75,8 +75,8 @@ Action::Result ActionImpl::disarm() const
     return action_result_from_command_result(
                _parent->send_command_with_ack(
                    MAV_CMD_COMPONENT_ARM_DISARM,
-                   MavlinkCommands::Params {0.0f, NAN, NAN, NAN, NAN, NAN, NAN},
-                   MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
+                   MAVLinkCommands::Params {0.0f, NAN, NAN, NAN, NAN, NAN, NAN},
+                   MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
 }
 
 Action::Result ActionImpl::kill() const
@@ -84,8 +84,8 @@ Action::Result ActionImpl::kill() const
     return action_result_from_command_result(
                _parent->send_command_with_ack(
                    MAV_CMD_COMPONENT_ARM_DISARM,
-                   MavlinkCommands::Params {0.0f, NAN, NAN, NAN, NAN, NAN, NAN},
-                   MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
+                   MAVLinkCommands::Params {0.0f, NAN, NAN, NAN, NAN, NAN, NAN},
+                   MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
 }
 
 Action::Result ActionImpl::takeoff() const
@@ -102,9 +102,9 @@ Action::Result ActionImpl::takeoff() const
     return action_result_from_command_result(
                _parent->send_command_with_ack(
                    MAV_CMD_NAV_TAKEOFF,
-                   MavlinkCommands::Params {NAN, NAN, NAN, NAN, NAN, NAN,
+                   MAVLinkCommands::Params {NAN, NAN, NAN, NAN, NAN, NAN,
                                             _relative_takeoff_altitude_m},
-                   MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
+                   MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
 }
 
 Action::Result ActionImpl::land() const
@@ -112,8 +112,8 @@ Action::Result ActionImpl::land() const
     return action_result_from_command_result(
                _parent->send_command_with_ack(
                    MAV_CMD_NAV_LAND,
-                   MavlinkCommands::Params {NAN, NAN, NAN, NAN, NAN, NAN, NAN},
-                   MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
+                   MAVLinkCommands::Params {NAN, NAN, NAN, NAN, NAN, NAN, NAN},
+                   MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
 }
 
 Action::Result ActionImpl::return_to_launch() const
@@ -135,8 +135,8 @@ Action::Result ActionImpl::transition_to_fixedwing() const
     return action_result_from_command_result(
                _parent->send_command_with_ack(
                    MAV_CMD_DO_VTOL_TRANSITION,
-                   MavlinkCommands::Params {float(MAV_VTOL_STATE_FW)},
-                   MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
+                   MAVLinkCommands::Params {float(MAV_VTOL_STATE_FW)},
+                   MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
 }
 
 void ActionImpl::transition_to_fixedwing_async(const Action::result_callback_t &callback)
@@ -157,11 +157,11 @@ void ActionImpl::transition_to_fixedwing_async(const Action::result_callback_t &
 
     _parent->send_command_with_ack_async(
         MAV_CMD_DO_VTOL_TRANSITION,
-        MavlinkCommands::Params {float(MAV_VTOL_STATE_FW)},
+        MAVLinkCommands::Params {float(MAV_VTOL_STATE_FW)},
         std::bind(&ActionImpl::command_result_callback,
                   _1,
                   callback),
-        MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
+        MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
 }
 
 Action::Result ActionImpl::transition_to_multicopter() const
@@ -177,8 +177,8 @@ Action::Result ActionImpl::transition_to_multicopter() const
     return action_result_from_command_result(
                _parent->send_command_with_ack(
                    MAV_CMD_DO_VTOL_TRANSITION,
-                   MavlinkCommands::Params {float(MAV_VTOL_STATE_MC)},
-                   MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
+                   MAVLinkCommands::Params {float(MAV_VTOL_STATE_MC)},
+                   MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT));
 }
 
 void ActionImpl::transition_to_multicopter_async(const Action::result_callback_t &callback)
@@ -199,11 +199,11 @@ void ActionImpl::transition_to_multicopter_async(const Action::result_callback_t
 
     _parent->send_command_with_ack_async(
         MAV_CMD_DO_VTOL_TRANSITION,
-        MavlinkCommands::Params {float(MAV_VTOL_STATE_MC)},
+        MAVLinkCommands::Params {float(MAV_VTOL_STATE_MC)},
         std::bind(&ActionImpl::command_result_callback,
                   _1,
                   callback),
-        MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
+        MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
 }
 
 void ActionImpl::arm_async(const Action::result_callback_t &callback)
@@ -220,21 +220,21 @@ void ActionImpl::arm_async(const Action::result_callback_t &callback)
 
 }
 
-void ActionImpl::arm_async_continued(MavlinkCommands::Result previous_result,
+void ActionImpl::arm_async_continued(MAVLinkCommands::Result previous_result,
                                      const Action::result_callback_t &callback)
 {
-    if (previous_result != MavlinkCommands::Result::SUCCESS) {
+    if (previous_result != MAVLinkCommands::Result::SUCCESS) {
         command_result_callback(previous_result, callback);
         return;
     }
 
     _parent->send_command_with_ack_async(
         MAV_CMD_COMPONENT_ARM_DISARM,
-        MavlinkCommands::Params {1.0f, NAN, NAN, NAN, NAN, NAN, NAN},
+        MAVLinkCommands::Params {1.0f, NAN, NAN, NAN, NAN, NAN, NAN},
         std::bind(&ActionImpl::command_result_callback,
                   _1,
                   callback),
-        MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
+        MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
 }
 
 void ActionImpl::disarm_async(const Action::result_callback_t &callback)
@@ -249,22 +249,22 @@ void ActionImpl::disarm_async(const Action::result_callback_t &callback)
 
     _parent->send_command_with_ack_async(
         MAV_CMD_COMPONENT_ARM_DISARM,
-        MavlinkCommands::Params {0.0f, NAN, NAN, NAN, NAN, NAN, NAN},
+        MAVLinkCommands::Params {0.0f, NAN, NAN, NAN, NAN, NAN, NAN},
         std::bind(&ActionImpl::command_result_callback,
                   _1,
                   callback),
-        MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
+        MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
 }
 
 void ActionImpl::kill_async(const Action::result_callback_t &callback)
 {
     _parent->send_command_with_ack_async(
         MAV_CMD_COMPONENT_ARM_DISARM,
-        MavlinkCommands::Params {0.0f, NAN, NAN, NAN, NAN, NAN, NAN},
+        MAVLinkCommands::Params {0.0f, NAN, NAN, NAN, NAN, NAN, NAN},
         std::bind(&ActionImpl::command_result_callback,
                   _1,
                   callback),
-        MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
+        MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
 }
 
 void ActionImpl::takeoff_async(const Action::result_callback_t &callback)
@@ -281,33 +281,33 @@ void ActionImpl::takeoff_async(const Action::result_callback_t &callback)
 }
 
 
-void ActionImpl::takeoff_async_continued(MavlinkCommands::Result previous_result,
+void ActionImpl::takeoff_async_continued(MAVLinkCommands::Result previous_result,
                                          const Action::result_callback_t &callback)
 {
-    if (previous_result != MavlinkCommands::Result::SUCCESS) {
+    if (previous_result != MAVLinkCommands::Result::SUCCESS) {
         command_result_callback(previous_result, callback);
         return;
     }
 
     _parent->send_command_with_ack_async(
         MAV_CMD_NAV_TAKEOFF,
-        MavlinkCommands::Params {NAN, NAN, NAN, NAN, NAN, NAN,
+        MAVLinkCommands::Params {NAN, NAN, NAN, NAN, NAN, NAN,
                                  _relative_takeoff_altitude_m},
         std::bind(&ActionImpl::command_result_callback,
                   _1,
                   callback),
-        MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
+        MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
 }
 
 void ActionImpl::land_async(const Action::result_callback_t &callback)
 {
     _parent->send_command_with_ack_async(
         MAV_CMD_NAV_LAND,
-        MavlinkCommands::Params {NAN, NAN, NAN, NAN, NAN, NAN, NAN},
+        MAVLinkCommands::Params {NAN, NAN, NAN, NAN, NAN, NAN, NAN},
         std::bind(&ActionImpl::command_result_callback,
                   _1,
                   callback),
-        MavlinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
+        MAVLinkCommands::DEFAULT_COMPONENT_ID_AUTOPILOT);
 }
 
 void ActionImpl::return_to_launch_async(const Action::result_callback_t &callback)
@@ -436,27 +436,27 @@ float ActionImpl::get_max_speed_m_s() const
 }
 
 Action::Result
-ActionImpl::action_result_from_command_result(MavlinkCommands::Result result)
+ActionImpl::action_result_from_command_result(MAVLinkCommands::Result result)
 {
     switch (result) {
-        case MavlinkCommands::Result::SUCCESS:
+        case MAVLinkCommands::Result::SUCCESS:
             return Action::Result::SUCCESS;
-        case MavlinkCommands::Result::NO_SYSTEM:
+        case MAVLinkCommands::Result::NO_SYSTEM:
             return Action::Result::NO_SYSTEM;
-        case MavlinkCommands::Result::CONNECTION_ERROR:
+        case MAVLinkCommands::Result::CONNECTION_ERROR:
             return Action::Result::CONNECTION_ERROR;
-        case MavlinkCommands::Result::BUSY:
+        case MAVLinkCommands::Result::BUSY:
             return Action::Result::BUSY;
-        case MavlinkCommands::Result::COMMAND_DENIED:
+        case MAVLinkCommands::Result::COMMAND_DENIED:
             return Action::Result::COMMAND_DENIED;
-        case MavlinkCommands::Result::TIMEOUT:
+        case MAVLinkCommands::Result::TIMEOUT:
             return Action::Result::TIMEOUT;
         default:
             return Action::Result::UNKNOWN;
     }
 }
 
-void ActionImpl::command_result_callback(MavlinkCommands::Result command_result,
+void ActionImpl::command_result_callback(MAVLinkCommands::Result command_result,
                                          const Action::result_callback_t &callback)
 {
     Action::Result action_result = action_result_from_command_result(command_result);
